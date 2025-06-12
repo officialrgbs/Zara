@@ -700,10 +700,30 @@
     .resource-box {
       border: 1px solid #ddd;
       border-radius: 5px;
-      padding: 10px;
-      margin-bottom: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
       background-color: #f9f9f9;
       position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    /* Fix for quicklink box */
+    .quicklink-box {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #f9f9f9;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      box-sizing: border-box;
     }
     
     .resource-title {
@@ -720,6 +740,8 @@
       margin: 0 0 10px 0;
       color: white;
       font-weight: bold;
+      align-self: flex-start;
+      width: auto;
     }
     
     .resource-description {
@@ -732,14 +754,23 @@
     .resource-link {
       margin-top: 10px;
       display: block;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-all;
+      hyphens: auto;
     }
     
     .resource-link a {
       display: inline-flex;
-      align-items: center;
+      align-items: flex-start;
       text-decoration: none;
       color: #2196F3;
       font-weight: 500;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-all;
     }
     
     .resource-link a:hover {
@@ -749,6 +780,7 @@
     .resource-link .icon {
       margin-right: 5px;
       font-size: 1.2em;
+      flex-shrink: 0;
     }
     
     .resource-archived {
@@ -1298,14 +1330,23 @@
     .quicklink-link {
       margin-top: 10px;
       display: block;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-all;
+      hyphens: auto;
     }
     
     .quicklink-link a {
       display: inline-flex;
-      align-items: center;
+      align-items: flex-start;
       text-decoration: none;
       color: #2196F3;
       font-weight: 500;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-all;
     }
     
     .quicklink-link a:hover {
@@ -1315,6 +1356,7 @@
     .quicklink-link .icon {
       margin-right: 5px;
       font-size: 1.2em;
+      flex-shrink: 0;
     }
     
     .quicklink-archived {
@@ -1652,6 +1694,88 @@
       /* Better scrolling for long content */
       body, .modal-content {
         -webkit-overflow-scrolling: touch;
+      }
+    }
+    
+    /* Fix for link overflow */
+    .resource-link, .quicklink-link {
+      margin-top: 10px;
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .resource-link a, .quicklink-link a {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+      color: #2196F3;
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-word;
+      word-wrap: break-word;
+    }
+    
+    .resource-link a:hover, .quicklink-link a:hover {
+      text-decoration: underline;
+    }
+    
+    .resource-link .icon, .quicklink-link .icon {
+      margin-right: 8px;
+      font-size: 1.2em;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    
+    /* Improve URL text display */
+    .link-text {
+      word-break: break-word;
+      overflow-wrap: break-word;
+      display: inline;
+      vertical-align: middle;
+      line-height: 1.4;
+      white-space: normal;
+    }
+    
+    /* Mobile-specific link adjustments */
+    @media (max-width: 767px) {
+      /* Fix for resource boxes */
+      .resource-box, .quicklink-box {
+        padding: 12px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      
+      /* Ensure links stay inside their container */
+      .resource-link, .quicklink-link {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0;
+      }
+      
+      /* Format link anchors for mobile */
+      .resource-link a, .quicklink-link a {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding-right: 5px;
+        overflow: hidden;
+        word-break: break-all;
+      }
+      
+      /* Fix for long URLs on smaller screens */
+      .link-text {
+        font-size: 0.9em;
+        max-width: calc(100% - 20px);
+        display: inline;
+        word-break: break-all;
+      }
+      
+      /* Make icon slightly smaller on mobile */
+      .resource-link .icon, .quicklink-link .icon {
+        font-size: 1.1em;
       }
     }
   </style>
@@ -2858,11 +2982,46 @@ let currentSortDirection = 'asc'; // asc = oldest first
       if (data.type === 'file') {
         // File resource
         link.href = data.fileUrl || '#';
-        link.innerHTML = '<span class="icon">📄</span> ' + (data.filename || 'Download File');
+        
+        // Create a structured file link display
+        const iconSpan = document.createElement('span');
+        iconSpan.className = 'icon';
+        iconSpan.textContent = '📄';
+        
+        const textSpan = document.createElement('span');
+        textSpan.className = 'link-text';
+        textSpan.textContent = data.filename || 'Download File';
+        
+        link.appendChild(iconSpan);
+        link.appendChild(textSpan);
       } else {
         // Link resource
         link.href = data.link || '#';
-        link.innerHTML = '<span class="icon">🔗</span> ' + (data.link || 'Open Link');
+        
+        // Create a structured URL display
+        const iconSpan = document.createElement('span');
+        iconSpan.className = 'icon';
+        iconSpan.textContent = '🔗';
+        
+        const textSpan = document.createElement('span');
+        textSpan.className = 'link-text';
+        
+        // Format URL for display - show trimmed version if too long
+        const displayUrl = data.link || 'Open Link';
+        
+        // Set the title attribute on the link, not the span
+        link.title = displayUrl;
+        
+        // Truncate long URLs for better display
+        if (displayUrl.length > 40) {
+          // Add ellipsis for display
+          textSpan.textContent = displayUrl.substring(0, 37) + '...';
+        } else {
+          textSpan.textContent = displayUrl;
+        }
+        
+        link.appendChild(iconSpan);
+        link.appendChild(textSpan);
       }
       
       resourceLink.appendChild(link);
@@ -5512,11 +5671,46 @@ let currentSortDirection = 'asc'; // asc = oldest first
       if (data.type === 'file') {
         // File resource
         link.href = data.fileUrl || '#';
-        link.innerHTML = '<span class="icon">📄</span> ' + (data.filename || 'Download File');
+        
+        // Create a structured file link display
+        const iconSpan = document.createElement('span');
+        iconSpan.className = 'icon';
+        iconSpan.textContent = '📄';
+        
+        const textSpan = document.createElement('span');
+        textSpan.className = 'link-text';
+        textSpan.textContent = data.filename || 'Download File';
+        
+        link.appendChild(iconSpan);
+        link.appendChild(textSpan);
       } else {
         // URL resource
         link.href = data.url || '#';
-        link.innerHTML = '<span class="icon">🔗</span> ' + (data.url || 'Open Link');
+        
+        // Create a structured URL display
+        const iconSpan = document.createElement('span');
+        iconSpan.className = 'icon';
+        iconSpan.textContent = '🔗';
+        
+        const textSpan = document.createElement('span');
+        textSpan.className = 'link-text';
+        
+        // Format URL for display - show trimmed version if too long
+        const displayUrl = data.url || 'Open Link';
+        
+        // Set the title attribute on the link, not the span
+        link.title = displayUrl;
+        
+        // Truncate long URLs for better display
+        if (displayUrl.length > 40) {
+          // Add ellipsis for display
+          textSpan.textContent = displayUrl.substring(0, 37) + '...';
+        } else {
+          textSpan.textContent = displayUrl;
+        }
+        
+        link.appendChild(iconSpan);
+        link.appendChild(textSpan);
       }
       
       quickLinkElement.appendChild(link);
