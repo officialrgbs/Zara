@@ -33,6 +33,42 @@
               800: '#1e40af',
               900: '#1e3a8a',
             },
+            pastel: {
+              50: '#f8f9fa',
+              100: '#e2e8f0',
+              200: '#cbd5e1',
+              300: '#a5b4fc',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#8b5cf6',
+              700: '#7c3aed',
+              800: '#6d28d9',
+              900: '#5b21b6',
+            },
+            pinkPastel: {
+              50: '#fdf2f8',
+              100: '#fce7f3',
+              200: '#fbcfe8',
+              300: '#f9a8d4',
+              400: '#f472b6',
+              500: '#ec4899',
+              600: '#db2777',
+              700: '#be185d',
+              800: '#9d174d',
+              900: '#831843',
+            },
+            mintGreen: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              300: '#86efac',
+              400: '#4ade80',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            },
             success: {
               500: '#22c55e',
               600: '#16a34a',
@@ -60,6 +96,187 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+    }
+    
+    /* Theme-related classes */
+    /* Purple pastel theme */
+    body.pastel-theme .bg-primary-600 {
+      background-color: var(--pastel-bg, #8b5cf6);
+    }
+    
+    body.pastel-theme .bg-primary-700,
+    body.pastel-theme .hover\:bg-primary-700:hover,
+    body.pastel-theme .focus\:bg-primary-700:focus {
+      background-color: var(--pastel-bg-dark, #7c3aed);
+    }
+    
+    body.pastel-theme .text-primary-500,
+    body.pastel-theme .border-primary-500 {
+      color: var(--pastel-text, #6366f1);
+      border-color: var(--pastel-text, #6366f1);
+    }
+    
+    body.pastel-theme .hover\:bg-primary-500:hover,
+    body.pastel-theme .bg-primary-500 {
+      background-color: var(--pastel-text, #6366f1);
+    }
+    
+    body.pastel-theme .hover\:text-primary-500:hover {
+      color: var(--pastel-text, #6366f1);
+    }
+    
+    body.pastel-theme button.bg-primary-600 {
+      background-color: var(--pastel-btn, #8b5cf6);
+    }
+    
+    body.pastel-theme button.bg-primary-600:hover {
+      background-color: var(--pastel-btn-hover, #7c3aed);
+    }
+    
+    /* Pink pastel theme */
+    body.pink-pastel-theme .bg-primary-600 {
+      background-color: var(--pink-pastel-bg, #db2777);
+    }
+    
+    body.pink-pastel-theme .bg-primary-700,
+    body.pink-pastel-theme .hover\:bg-primary-700:hover,
+    body.pink-pastel-theme .focus\:bg-primary-700:focus {
+      background-color: var(--pink-pastel-bg-dark, #be185d);
+    }
+    
+    body.pink-pastel-theme .text-primary-500,
+    body.pink-pastel-theme .border-primary-500 {
+      color: var(--pink-pastel-text, #ec4899);
+      border-color: var(--pink-pastel-text, #ec4899);
+    }
+    
+    body.pink-pastel-theme .hover\:bg-primary-500:hover,
+    body.pink-pastel-theme .bg-primary-500 {
+      background-color: var(--pink-pastel-text, #ec4899);
+    }
+    
+    body.pink-pastel-theme .hover\:text-primary-500:hover {
+      color: var(--pink-pastel-text, #ec4899);
+    }
+    
+    body.pink-pastel-theme button.bg-primary-600 {
+      background-color: var(--pink-pastel-btn, #db2777);
+    }
+    
+    body.pink-pastel-theme button.bg-primary-600:hover {
+      background-color: var(--pink-pastel-btn-hover, #be185d);
+    }
+    
+    /* Mint green theme */
+    body.mint-green-theme .bg-primary-600 {
+      background-color: var(--mint-green-bg, #16a34a);
+    }
+    
+    body.mint-green-theme .bg-primary-700,
+    body.mint-green-theme .hover\:bg-primary-700:hover,
+    body.mint-green-theme .focus\:bg-primary-700:focus {
+      background-color: var(--mint-green-bg-dark, #15803d);
+    }
+    
+    body.mint-green-theme .text-primary-500,
+    body.mint-green-theme .border-primary-500 {
+      color: var(--mint-green-text, #22c55e);
+      border-color: var(--mint-green-text, #22c55e);
+    }
+    
+    body.mint-green-theme .hover\:bg-primary-500:hover,
+    body.mint-green-theme .bg-primary-500 {
+      background-color: var(--mint-green-text, #22c55e);
+    }
+    
+    body.mint-green-theme .hover\:text-primary-500:hover {
+      color: var(--mint-green-text, #22c55e);
+    }
+    
+    body.mint-green-theme button.bg-primary-600 {
+      background-color: var(--mint-green-btn, #16a34a);
+    }
+    
+    body.mint-green-theme button.bg-primary-600:hover {
+      background-color: var(--mint-green-btn-hover, #15803d);
+    }
+    
+    /* CSS Variables for themes */
+    :root {
+      --pastel-bg: #8b5cf6;
+      --pastel-bg-dark: #7c3aed;
+      --pastel-text: #6366f1;
+      --pastel-btn: #8b5cf6;
+      --pastel-btn-hover: #7c3aed;
+      
+      --pink-pastel-bg: #db2777;
+      --pink-pastel-bg-dark: #be185d;
+      --pink-pastel-text: #ec4899;
+      --pink-pastel-btn: #db2777;
+      --pink-pastel-btn-hover: #be185d;
+      
+      --mint-green-bg: #16a34a;
+      --mint-green-bg-dark: #15803d;
+      --mint-green-text: #22c55e;
+      --mint-green-btn: #16a34a;
+      --mint-green-btn-hover: #15803d;
+    }
+    
+    /* Settings button theme-specific styling */
+    body.pastel-theme #settings-btn {
+      background-color: var(--pastel-bg, #8b5cf6);
+    }
+    
+    body.pastel-theme #settings-btn:hover {
+      background-color: var(--pastel-bg-dark, #7c3aed);
+    }
+    
+    body.pink-pastel-theme #settings-btn {
+      background-color: var(--pink-pastel-bg, #db2777);
+    }
+    
+    body.pink-pastel-theme #settings-btn:hover {
+      background-color: var(--pink-pastel-bg-dark, #be185d);
+    }
+    
+    body.mint-green-theme #settings-btn {
+      background-color: var(--mint-green-bg, #16a34a);
+    }
+    
+    body.mint-green-theme #settings-btn:hover {
+      background-color: var(--mint-green-bg-dark, #15803d);
+    }
+    
+    /* Theme color indicators */
+    .theme-color-blue {
+      background-color: #2563eb;
+    }
+    
+    .theme-color-pastel {
+      background-color: #8b5cf6;
+    }
+    
+    .theme-color-pink-pastel {
+      background-color: #db2777;
+    }
+    
+    .theme-color-mint-green {
+      background-color: #16a34a;
+    }
+    
+    /* Theme modal styling */
+    #theme-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     /* Override the active navbar item styles */
@@ -6015,6 +6232,7 @@ let currentSortDirection = 'asc'; // asc = oldest first
              class="nav-link px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-primary-700 transition duration-150">
             <i class="fas fa-info-circle mr-1"></i>About
           </a>
+
         </div>
         
         <!-- Mobile menu button -->
@@ -6062,6 +6280,7 @@ let currentSortDirection = 'asc'; // asc = oldest first
            class="nav-link block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-primary-700">
           <i class="fas fa-info-circle mr-2"></i>About
         </a>
+
       </div>
     </div>
   </nav>
@@ -7148,6 +7367,70 @@ let currentSortDirection = 'asc'; // asc = oldest first
       <button id="image-preview-close">×</button>
     </div>
   </div>
+  
+  <!-- Floating Settings Button -->
+  <button id="settings-btn" onclick="toggleThemeModal()" 
+    class="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-primary-600 text-white shadow-lg hover:bg-primary-700 flex items-center justify-center transition duration-300 z-50">
+    <i class="fas fa-cog text-xl"></i>
+  </button>
+
+  <!-- Theme Settings Modal -->
+  <div id="theme-modal" class="modal" style="display: none;">
+    <div class="modal-content max-w-md w-full bg-white rounded-lg shadow-xl overflow-hidden">
+      <div class="flex justify-between items-center p-4 border-b">
+        <h2 class="text-xl font-bold text-gray-800">Settings</h2>
+        <button onclick="toggleThemeModal()" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="p-6">
+        <h3 class="text-lg font-semibold text-gray-700 mb-4">Theme Selection</h3>
+        
+        <div class="flex flex-col space-y-4">
+          <div class="flex items-center space-x-3">
+            <input type="radio" id="blue-theme" name="theme" value="blue" class="h-5 w-5 text-primary-600 focus:ring-primary-500" 
+                  onclick="setTheme('blue')" checked>
+            <label for="blue-theme" class="flex items-center">
+              <span class="inline-block w-8 h-8 rounded-full shadow-sm mr-2 theme-color-blue"></span>
+              <span class="text-gray-700">Blue (Default)</span>
+            </label>
+          </div>
+          
+          <div class="flex items-center space-x-3">
+            <input type="radio" id="pastel-theme" name="theme" value="pastel" class="h-5 w-5 text-pastel-600 focus:ring-pastel-500"
+                  onclick="setTheme('pastel')">
+            <label for="pastel-theme" class="flex items-center">
+              <span class="inline-block w-8 h-8 rounded-full shadow-sm mr-2 theme-color-pastel"></span>
+              <span class="text-gray-700">Pastel Purple</span>
+            </label>
+          </div>
+          
+          <div class="flex items-center space-x-3">
+            <input type="radio" id="pink-pastel-theme" name="theme" value="pink-pastel" class="h-5 w-5 text-pinkPastel-600 focus:ring-pinkPastel-500"
+                  onclick="setTheme('pink-pastel')">
+            <label for="pink-pastel-theme" class="flex items-center">
+              <span class="inline-block w-8 h-8 rounded-full shadow-sm mr-2 theme-color-pink-pastel"></span>
+              <span class="text-gray-700">Pink Pastel</span>
+            </label>
+          </div>
+          
+          <div class="flex items-center space-x-3">
+            <input type="radio" id="mint-green-theme" name="theme" value="mint-green" class="h-5 w-5 text-mintGreen-600 focus:ring-mintGreen-500"
+                  onclick="setTheme('mint-green')">
+            <label for="mint-green-theme" class="flex items-center">
+              <span class="inline-block w-8 h-8 rounded-full shadow-sm mr-2 theme-color-mint-green"></span>
+              <span class="text-gray-700">Mint Green</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="mt-6 text-sm text-gray-500">
+          Your theme preference will be saved for future visits.
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Alpine.js for interactive components -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.1/dist/cdn.min.js"></script>
@@ -7163,6 +7446,60 @@ let currentSortDirection = 'asc'; // asc = oldest first
         mobileMenu.classList.add('hidden');
       }
     }
+
+    // Theme toggling functionality
+    function toggleThemeModal() {
+      const modal = document.getElementById('theme-modal');
+      if (modal.style.display === 'none') {
+        modal.style.display = 'flex';
+      } else {
+        modal.style.display = 'none';
+      }
+    }
+
+    function setTheme(theme) {
+      const body = document.body;
+      // Remove any existing theme classes
+      body.classList.remove('pastel-theme', 'pink-pastel-theme', 'mint-green-theme');
+      
+      // Set the new theme based on selection
+      switch(theme) {
+        case 'pastel':
+          body.classList.add('pastel-theme');
+          localStorage.setItem('studenthub-theme', 'pastel');
+          document.getElementById('pastel-theme').checked = true;
+          break;
+        case 'pink-pastel':
+          body.classList.add('pink-pastel-theme');
+          localStorage.setItem('studenthub-theme', 'pink-pastel');
+          document.getElementById('pink-pastel-theme').checked = true;
+          break;
+        case 'mint-green':
+          body.classList.add('mint-green-theme');
+          localStorage.setItem('studenthub-theme', 'mint-green');
+          document.getElementById('mint-green-theme').checked = true;
+          break;
+        default: // blue theme (default)
+          localStorage.setItem('studenthub-theme', 'blue');
+          document.getElementById('blue-theme').checked = true;
+      }
+    }
+
+    // Load saved theme on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load the saved theme from localStorage
+      const savedTheme = localStorage.getItem('studenthub-theme');
+      
+      if (savedTheme === 'pastel') {
+        setTheme('pastel');
+      } else if (savedTheme === 'pink-pastel') {
+        setTheme('pink-pastel');
+      } else if (savedTheme === 'mint-green') {
+        setTheme('mint-green');
+      } else {
+        setTheme('blue');
+      }
+    });
   </script>
 </body>
 </html>
